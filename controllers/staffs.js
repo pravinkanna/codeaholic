@@ -24,9 +24,7 @@ exports.showDashboard = (req, res) => {
 }
 
 exports.showProblems = async (req, res) => {
-    let populatedStaff = await Staff
-        .findById(req.user.id)
-        .populate("problems")
+    let populatedStaff = await Staff.findById(req.user.id).populate("problems")
     res.render('staffs/problems', { title: "Problems", problems: populatedStaff.problems })
 }
 

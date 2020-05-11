@@ -1,28 +1,28 @@
 const createError = require('http-errors');
-const express = require('express');
-var favicon = require('serve-favicon')
+const favicon = require('serve-favicon')
 const path = require('path');
 const logger = require('morgan');
 const session = require('express-session')
 const mongoose = require('mongoose');
-var MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash')
 const passport = require('passport')
+const express = require('express');
+const app = express();
 
-
+//Routes
 const indexRouter = require('./routes/index');
 const studentsRouter = require('./routes/students');
 const staffsRouter = require('./routes/staffs');
 const adminRouter = require('./routes/admin');
 
-const app = express();
+
 
 //DotEnv config
 require('dotenv').config()
 
 //Setting favicon.ico
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
-
 
 //Passport config
 require('./config/passport')(passport)
@@ -41,8 +41,6 @@ app.set('view engine', 'ejs');
 
 //Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 //Logger Middleware
 app.use(logger('dev'));
@@ -74,7 +72,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-
 //Global vars
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg')
@@ -82,7 +79,6 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error')
     next()
 })
-
 
 //Routes
 app.use('/', indexRouter);
@@ -99,8 +95,6 @@ app.use(function (req, res, next) {
 app.use((err, req, res, next) => {
     // set locals, only providing error in development
     res.locals.message = err.message;
-    // res.locals.error = req.app.get('env') === 'development' ? err : {};
-    // render the error page
     res.status(err.status || 500);
     console.log(err);
     res.render('error', { title: "Error", message: err.message });
