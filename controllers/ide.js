@@ -1,27 +1,27 @@
 const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const readFile = util.promisify(require('fs').readFile)
 const writeFile = util.promisify(require('fs').writeFile)
-const unlink = util.promisify(require('fs').unlink);
+const mkdir = util.promisify(require('fs').mkdir);
+const rmdir = util.promisify(require('fs').rmdir);
 
 // Models
 const Problem = require('../models/Problem');
-
-//Path to user directory
-const pathToUserDir = path.join(__dirname, `../userCode/`);
-
-
+//global Path to user directory
+let pathToUserDir;
 
 exports.run = async (req, res) => {
     const input = req.body.input;
     const srcCode = req.body.code;
     const lang = req.body.lang;
-
     //session id
     const sess_id = req.session.id;
+    //Path to user directory
+    pathToUserDir = path.join(__dirname, `../temp/${sess_id}/`);
 
     try {
+        //Create directory
+        await mkdir(pathToUserDir, { recursive: true })
         //Writing input file
         await writeFile(`${pathToUserDir}${sess_id}_input.txt`, input, 'utf8');
         //Writing Src file
@@ -29,9 +29,8 @@ exports.run = async (req, res) => {
         //Running Code
         const output = await run(sess_id, lang);
         res.send(JSON.stringify({ "output": output[0], "error": output[1] }))
-        // //Deleting created files
-        // await unlink(`${pathToUserDir}${sess_id}_input.txt`)
-        // await unlink(`${pathToUserDir}${sess_id}_${lang}.${lang}`)
+        //Deleting user directory
+        await rmdir(pathToUserDir, { recursive: true });
     } catch (e) {
         console.error(e)
     }
@@ -43,13 +42,16 @@ exports.submit = async (req, res) => {
     const reg_no = req.user.reg_no;
     const urlParts = (req.body.url).split('/');
     const problem_id = urlParts.pop() || urlParts.pop();
-
     //session id
     const sess_id = req.session.id;
+    //Path to user directory
+    pathToUserDir = path.join(__dirname, `../userCode/`);
     //Result array
     result = []
 
     try {
+        //Create directory
+        await mkdir(pathToUserDir, { recursive: true })
         //Writing Src file
         await writeFile(`${pathToUserDir}${sess_id}_${lang}.${lang}`, srcCode, 'utf8');
         //Getting Problem from DB
@@ -62,6 +64,8 @@ exports.submit = async (req, res) => {
             console.log('user: ', output[0], 'original: ', testcase['output']);
             result.push(testcase['output'] == output[0].trimEnd())
         }
+        //Deleting user directory
+        await rmdir(pathToUserDir, { recursive: true });
         console.log(result);
     } catch (e) {
         console.log(e);
@@ -72,9 +76,8 @@ exports.submit = async (req, res) => {
 
 
 //Function to run code
-const run = (reg_no, lang) => {
+const run = async (reg_no, lang) => {
     return new Promise(async (resolve, reject) => {
-
         let output = '';
         let error = '';
 
@@ -108,8 +111,5 @@ const run = (reg_no, lang) => {
             error = e.stderr.toString();
             resolve([output, error])
         }
-
-
     });
-
 }
