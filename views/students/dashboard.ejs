@@ -1,0 +1,17 @@
+<% include ../partials/header.ejs %>
+<h1>Student Dashboard</h1>
+<a href="/students/signout" class="btn btn-primary">Logout</a>
+
+<div class="container card-container">
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><b>Codeaholic IDE</b></h5>
+
+                <a href="/students/<%= reg_no %>/ide" class="btn btn-primary">Click Here</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

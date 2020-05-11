@@ -1,0 +1,140 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: whitesmoke;
+}
+
+/*Home Page*/
+#home-heading{
+  margin-top: 5rem;
+}
+
+.card-container{
+  margin-top: 10rem;
+}
+
+/* Navbar button spacing */
+.btn{
+  margin-left:10px;
+  margin-right: 10px;
+}
+
+/* For Ace Editor */
+#editor { 
+  position: relative;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.navbar li a {
+  cursor: pointer;
+}
+
+/* Resizable Panes */
+.page-container {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* horizontal panel*/
+.panel-container {
+  display: flex;
+  flex-direction: row;
+  background: whitesmoke;
+  border: 1px solid silver;
+  overflow: hidden;
+}
+
+.panel-left {
+  flex: 0 0 auto;
+  width: 40vw;
+  min-width: 10vw;
+  max-width: 90vw;
+}
+
+.panel-left.questionPane .panel-container-vertical{
+  overflow: auto;
+  padding: 15px;
+}
+
+.ioContainer{
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.splitter {
+  flex: 0 0 auto;
+  width: 2px;  
+  background: #535353;
+  min-height: 200px;
+  cursor: col-resize;  
+}
+
+.panel-right {
+  flex: 1 1 auto;
+  min-height: 100vh;
+  min-width: 200px;
+}
+
+/* vertical panel */
+.panel-container-vertical {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border: 1px solid silver;
+  overflow: hidden;
+}
+
+.panel-top {
+  flex: 0 0 auto;
+  height: 65%;
+  width: 100%;
+}
+
+.splitter-horizontal {
+  flex: 0 0 auto;
+  height: 2px;
+  background: #535353;
+  cursor: row-resize;
+}
+
+.panel-bottom {
+  flex: 1 1 auto;
+  height: 100px;
+}
+
+.panel-left.inputPane{
+  width: 50%;
+  padding: 10px;
+}
+
+.panel-right.outputPane{
+  width: 50%;
+  padding: 10px;
+}
+
+#outputTextbox {
+  height: 185px;
+  overflow: auto;
+  padding: 10px;
+  width: 100%;
+  background-color: lightgray;
+}
+
+.spinner-border {
+  position: relative;
+  top: 50px;
+  left: 50%;
+}
+
+

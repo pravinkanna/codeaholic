@@ -1,0 +1,31 @@
+<% include ../partials/header.ejs %>
+<div class="container">
+    <a href="/staffs/problems/create" class="btn btn-primary">Create Problem</a>
+
+    <h3>Problems</h3>
+    <ul class="list-group">
+
+        <% if (typeof problems != 'undefined') { %>
+        <% let i = 1 %>
+        <% problems.forEach((problem)=> {   %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= i %>. <%= problem.name %>
+            <div class="d-flex justify-content-end">
+                <a href="/staffs/problems/<%= problem.id %>/edit"> <i class="far fa-edit">&nbsp;Edit</i></a>
+                <a href="/staffs/problems/<%= problem.id %>/delete"> <i class="far fa-trash-alt" style="color: red;">&nbsp;Delete</i></a>
+            </div>
+        </li>
+        <br>
+        <% i+=1 %>
+        <% }); %>
+        <% } %>
+    </ul>
+    <style>
+        .list-group-item a {
+            margin: 0 5px;
+        }
+    </style>
+
+</div>
+
+<% include ../partials/footer.ejs %>

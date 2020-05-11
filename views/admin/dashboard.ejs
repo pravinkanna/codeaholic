@@ -1,0 +1,33 @@
+<% include ../partials/header.ejs %>
+<h1 class="text-center" id="home-heading">Welcom Admin</h1>
+<a href="/admin/signout" class="btn btn-primary">Sign out</a>
+<div class="container card-container">
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><b>Register Student</b></h5>
+
+                <a href="/admin/registerStudent" class="btn btn-primary">Click Here</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><b> Register Staffs</b></h5>
+
+                <a href="/admin/registerStaff" class="btn btn-primary">Click Here</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><b> Register Admin</b></h5>
+
+                <a href="/admin/registerAdmin" class="btn btn-primary">Click Here</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<% include ../partials/footer.ejs %>

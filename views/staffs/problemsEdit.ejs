@@ -1,0 +1,120 @@
+<% include ../partials/header.ejs %>
+<div class="container">
+    <h2>Edit Problem</h2>
+    <form action="/staffs/problems/<%= problem.id %>/edit" method="POST">
+        <% include ../partials/messages.ejs %>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="<%= problem.name %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty" class="form-control" name="difficulty" required>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="statement">Problem Statement</label>
+            <textarea class="form-control" id="statement" name="statement" rows="5" required><%= problem.statement %></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="input_format">Input Format</label>
+            <textarea class="form-control" id="input_format" name="input_format" rows="2" required><%= problem.input_format %></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label for="constraints">Constraints</label>
+            <textarea class="form-control" id="constraints" name="constraints" rows="2" required><%= problem.constraints %></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="output_format">Output Format</label>
+            <textarea class="form-control" id="output_format" name="output_format" rows="2" required><%= problem.output_format %></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label class="control-label col-sm-4" for="sampleInput1" required>Sample Input 1</label>
+                <div class="col-sm-12">
+
+                    <textarea class="form-control" id="sampleInput1" name="sample_testcases[0][input]" rows="4" required><%= problem.sample_testcases[0]['input'] %></textarea>
+                </div>
+            </div>
+
+            <div class="form-group col-5">
+                <label class="control-label col-sm-4" for="sampleOutput1">Sample Ouput 1</label>
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="sampleOutput1" name="sample_testcases[0][output]" rows="4" required><%= problem.sample_testcases[0]['output'] %></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label class="control-label col-sm-4" for="hiddenInput1">Hidden Input 1</label>
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="hiddenInput1" name="hidden_testcases[0][input]" rows="4" required><%= problem.hidden_testcases[0]['input'] %></textarea>
+                </div>
+            </div>
+
+            <div class="form-group col-5">
+                <label class="control-label col-sm-4" for="hiddenOutput1">Hidden Ouput 1</label>
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="hiddenOutput1" name="hidden_testcases[0][output]" rows="4" required><%= problem.hidden_testcases[0]['output'] %></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label class="control-label col-sm-4" for="hiddenInput2">Hidden Input 2</label>
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="hiddenInput2" name="hidden_testcases[1][input]" rows="4" required><%= problem.hidden_testcases[1]['input'] %></textarea>
+                </div>
+            </div>
+
+            <div class="form-group col-5">
+                <label class="control-label col-sm-4" for="hiddenOutput2">Hidden Ouput 2</label>
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="hiddenOutput2" name="hidden_testcases[1][output]" rows="4" required><%= problem.hidden_testcases[1]['output'] %></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label class="control-label col-sm-4" for="hiddenInput3">Hidden Input 3</label>
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="hiddenInput3" name="hidden_testcases[2][input]" rows="4" required><%= problem.hidden_testcases[2]['input'] %></textarea>
+                </div>
+            </div>
+
+            <div class="form-group col-5">
+                <label class="control-label col-sm-4" for="hiddenOutput3">Hidden Ouput 3</label>
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="hiddenOutput3" name="hidden_testcases[2][output]" rows="4" required><%= problem.hidden_testcases[2]['output'] %></textarea>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<style>
+    .container {
+        margin-top: 5rem;
+    }
+
+    .checkbox-inline {
+        margin: 10px 20px;
+    }
+</style>
+
+<% include ../partials/footer.ejs %>

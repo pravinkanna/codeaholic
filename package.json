@@ -1,0 +1,35 @@
+{
+    "name": "codeaholic",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/www",
+        "dev": "nodemon ./bin/www"
+    },
+    "dependencies": {
+        "connect-flash": "^0.1.1",
+        "connect-mongo": "^3.2.0",
+        "debug": "~2.6.9",
+        "dotenv": "^8.2.0",
+        "ejs": "~2.6.1",
+        "express": "~4.16.1",
+        "express-session": "^1.17.1",
+        "express-validator": "^6.4.0",
+        "http-errors": "~1.6.3",
+        "mongoose": "^5.9.9",
+        "morgan": "~1.9.1",
+        "passport": "^0.4.1",
+        "passport-local": "^1.0.0",
+        "serve-favicon": "^2.5.0"
+    },
+    "description": "Online Coding IDE and Judge",
+    "main": "app.js",
+    "author": "Pravin kanna P",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^2.0.3"
+    },
+    "engines": {
+        "node": "12.x"
+    }
+}
