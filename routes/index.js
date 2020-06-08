@@ -13,5 +13,7 @@ router.get("/playground", indexController.showPlayground);
 
 router.post("/playground/run", ideController.run);
 
+router.get("/playground/stop", ideController.stop);
+
 module.exports = router;
 

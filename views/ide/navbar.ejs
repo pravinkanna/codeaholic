@@ -1,0 +1,46 @@
+<!-- Navbar Content  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <% if (title==='Codeaholic IDE') {  %>
+    <button class="btn" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
+    <% } %>
+    <a class="navbar-brand" href="/" style="font-family: 'Permanent Marker', cursive;font-size: 32px;">
+        <img src="/images/logo_32x32.png" width="50" height="50" class="d-inline-block align-top" alt="">
+        Codeaholic
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active"><button id="runBtn" class="btn btn-primary" href="#">Run</button></li>
+            <% if (title==='Codeaholic IDE') {  %>
+            <li class="nav-item"><button id="submitBtn" class="btn btn-success" href="#">Submit</button></li>
+            <% } %>
+            <li class="nav-item active"><button id="stopBtn" class="btn btn-danger" href="#">Stop</button></li>
+
+            <!-- Select Language dropdown -->
+            <li class="nav-item dropdown active">
+                <button class="nav-link btn btn-default dropdown-toggle" id="langNavbarDropdown" data-toggle="dropdown">Select Language</button>
+
+                <div class="dropdown-menu dropdown-menu-lang">
+                    <a class="dropdown-item" id="cDropdown" data-value="c">C</a>
+                    <a class="dropdown-item" id="cDropdown" data-value="cpp">C++</a>
+                    <a class="dropdown-item" id="pythonDropdown" data-value="py">Python</a>
+                    <a class="dropdown-item" id="javaDropdown" data-value="java">Java</a>
+                </div>
+            </li>
+            <!-- /#Select Language dropdown wrapper -->
+
+            <!-- Select Theme dropdown -->
+            <li class="nav-item dropdown active">
+                <button class="nav-link btn btn-default dropdown-toggle" id="themesNavbarDropdown" data-toggle="dropdown">Select Theme</button>
+                <div class="dropdown-menu dropdown-menu-theme">
+                    <a class="dropdown-item" id="lightDropdown" data-value="light">Light</a>
+                    <a class="dropdown-item" id="darkDropdown" data-value="dark">Dark</a>
+                </div>
+            </li>
+
+            <!-- /#Select Theme dropdown Wraper -->
+
+
+        </ul>
+    </div>
+</nav>
+<!-- /#Navbar wrapper  -->

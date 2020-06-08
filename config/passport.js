@@ -52,7 +52,7 @@ module.exports = function (passport) {
             if (!admin) {
                 return done(null, false, { message: "Admin not registered" })
             }
-
+            console.log(`given: ${password} original: ${admin.password}`);
             if (password === admin.password) {
                 return done(null, admin)
             }

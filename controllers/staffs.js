@@ -83,8 +83,9 @@ exports.showEditProblem = async (req, res) => {
 
 exports.editProblem = async (req, res) => {
     try {
-        //Setting new values
+        //Getting Problem from DB
         const problem = await Problem.findOne({ _id: req.params.problem_id });
+        //Setting new values
         problem.name = req.body.name;
         problem.difficulty = req.body.difficulty;
         problem.statement = req.body.statement;
@@ -93,7 +94,6 @@ exports.editProblem = async (req, res) => {
         problem.output_format = req.body.output_format;
         problem.sample_testcases = req.body.sample_testcases;
         problem.hidden_testcases = req.body.hidden_testcases;
-
         //Saving new values to DB
         await problem.save();
 

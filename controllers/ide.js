@@ -9,6 +9,8 @@ const rmdir = util.promisify(require('fs').rmdir);
 const Problem = require('../models/Problem');
 //global Path to user directory
 let pathToUserDir;
+//For killing process PID
+let child;
 
 exports.run = async (req, res) => {
     const input = req.body.input;
@@ -34,6 +36,13 @@ exports.run = async (req, res) => {
     } catch (e) {
         console.error(e)
     }
+}
+
+exports.stop = (req, res) => {
+    console.log(child);
+    process.kill(child.pid);
+    console.log("Killed");
+    return res.send(JSON.stringify({ output: "", error: "Execution Stopped" }))
 }
 
 exports.submit = async (req, res) => {
@@ -83,13 +92,13 @@ const run = async (reg_no, lang) => {
 
         try {
             if (lang === 'c') {
-                await exec(`gcc ${reg_no}_c.c -o ${reg_no}_c`, { cwd: pathToUserDir })
-                const { stdout, stderr } = await exec(`./${reg_no}_c < ${reg_no}_input.txt`, { cwd: pathToUserDir })
+                child = await exec(`gcc ${reg_no}_c.c -o ${reg_no}_c`, { cwd: pathToUserDir })
+                const { stdout, stderr } = await exec(`./${reg_no}_c < ${reg_no}_input.txt`, { timeout: 100, maxBuffer: 1024 * 100, cwd: pathToUserDir })
                 output = stdout;
                 error = stderr;
             } else if (lang === 'cpp') {
                 await exec(`g++ ${reg_no}_cpp.cpp -o ${reg_no}_cpp`, { cwd: pathToUserDir })
-                const { stdout, stderr } = await exec(`./${reg_no}_cpp < ${reg_no}_input.txt`, { cwd: pathToUserDir })
+                const { stdout, stderr } = await exec(`./${reg_no}_cpp < ${reg_no}_input.txt`, { timeout: 100, maxBuffer: 1024 * 100, cwd: pathToUserDir })
                 output = stdout;
                 error = stderr;
             } else if (lang === 'py') {
@@ -108,7 +117,7 @@ const run = async (reg_no, lang) => {
             resolve([output, error])
         } catch (e) {
             console.error(`exec error: ${e}`);
-            error = e.stderr.toString();
+            error = e.toString();
             resolve([output, error])
         }
     });
