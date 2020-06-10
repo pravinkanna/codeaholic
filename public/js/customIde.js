@@ -144,9 +144,13 @@ function submitCode(e) {
       document.getElementById("outputTextbox").innerHTML = "";
       //Printing Output in Output textbox
       let i = 0;
-      data["output"].forEach((element) => {
-        if (element === true) {
+      console.log("data['output']", data["output"]);
+
+      data["output"]["submissions"].forEach((element) => {
+        if (element["status_id"] == 3) {
           document.getElementById("outputTextbox").innerHTML += "Test case " + i + ' <span style="color:green; font-size:25px"> &#10004; </span><br>';
+        } else if (element["status_id"] == 5) {
+          document.getElementById("outputTextbox").innerHTML += "Test case " + i + ' <span style="color:#ff8000; font-size:25px"> &#9200; </span><br>';
         } else {
           document.getElementById("outputTextbox").innerHTML += "Test case " + i + ' <span style="color:red; font-size:25px""> &#10008; </span><br>';
         }
