@@ -31,7 +31,6 @@ exports.run = async (req, res) => {
     if (result["error"]) result["error"] = decodeB64(result["error"]);
     if (result["message"]) result["message"] = decodeB64(result["message"]);
     if (result["compile_output"]) result["compile_output"] = decodeB64(result["compile_output"]);
-    console.log(result);
     //Sending Response to user
     res.send(result);
   } catch (e) {
@@ -107,7 +106,6 @@ const creteSingleSubmission = async (stdin, src, langId) => {
           language_id: langId,
           source_code: src,
           stdin: stdin,
-          expected_output: encodeB64("Hello world"),
         },
         json: true,
       };
