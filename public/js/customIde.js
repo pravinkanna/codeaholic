@@ -72,7 +72,9 @@ function runCode(e) {
         document.getElementById("outputTextbox").innerHTML = '<span style="color:red">' + data["compile_output"] + "</span>";
       } else if (data["status"]["id"] >= 7 && data["status"]["id"] <= 12) {
         //7,8,9,10,11,12 ==> Runtime Error
-        document.getElementById("outputTextbox").innerHTML = `<span style="color:red">Error Code<b>${data["status"]["id"]}</b><br />${data["compile_output"]}</span>`;
+        console.log(data);
+        let error = data["compile_output"] || data["stderr"];
+        document.getElementById("outputTextbox").innerHTML = `<span style="color:red">Error Code&nbsp;<b>${data["status"]["id"]}</b><br />${error}</span>`;
       } else {
         document.getElementById("outputTextbox").innerHTML = '<span style="color:red">SERVER INTERNAL ERROR</span>';
       }
