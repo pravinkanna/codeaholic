@@ -2,154 +2,141 @@
 
 <!-- Main Content-->
 <div class="d-flex toggled" id="wrapper">
-    <% if (title==='Codeaholic IDE') {  %>
-    <!-- Sidebar Content-->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading"><b>PROBLEMS</b></div>
-        <div class="list-group list-group-flush">
-            <% if (typeof problem_names != 'undefined') { %>
-            <% let i=1 %>
-            <% problem_names.forEach((problem)=> {   %>
-            <a href="/students/<%= reg_no %>/ide/<%= problem['_id'] %>" class="list-group-item list-group-item-action bg-light"><%= i %>. <%= problem['name'] %></a>
-            <% i+=1 %>
-            <% }); %>
-            <% } %>
-        </div>
+  <% if (title==='Codeaholic IDE') { %>
+  <!-- Sidebar Content-->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading"><b>PROBLEMS</b></div>
+    <div class="list-group list-group-flush">
+      <% if (typeof problem_names != 'undefined') { %> <% let i=1 %> <% problem_names.forEach((problem)=> { %>
+      <a href="/students/<%= reg_no %>/ide/<%= problem['_id'] %>" class="list-group-item list-group-item-action bg-light"><%= i %>. <%= problem['name'] %></a>
+      <% i+=1 %> <% }); %> <% } %>
     </div>
-    <!-- /#sidebar-wrapper -->
-    <% } %>
+  </div>
+  <!-- /#sidebar-wrapper -->
+  <% } %>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <!-- Navbar Content  -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <% if (title==='Codeaholic IDE') { %>
+      <button class="btn" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
+      <% } %>
+      <a class="navbar-brand" href="/" style="font-family: 'Permanent Marker', cursive; font-size: 32px;">
+        <img src="/images/logo_1080x1080.png" width="50" height="50" class="d-inline-block align-top" alt="" />
+        Codeaholic
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item active"><button id="runBtn" class="btn btn-primary" href="#">Run</button></li>
+          <% if (title==='Codeaholic IDE') { %>
+          <li class="nav-item"><button id="submitBtn" class="btn btn-success" href="#">Submit</button></li>
+          <% } %>
 
-        <!-- Navbar Content  -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <% if (title==='Codeaholic IDE') {  %>
-            <button class="btn" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
-            <% } %>
-            <a class="navbar-brand" href="/" style="font-family: 'Permanent Marker', cursive;font-size: 32px;">
-                <img src="/images/logo_1080x1080.png" width="50" height="50" class="d-inline-block align-top" alt="">
-                Codeaholic
-            </a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active"><button id="runBtn" class="btn btn-primary" href="#">Run</button></li>
-                    <% if (title==='Codeaholic IDE') {  %>
-                    <li class="nav-item"><button id="submitBtn" class="btn btn-success" href="#">Submit</button></li>
-                    <% } %>
+          <!-- Select Language dropdown -->
+          <li class="nav-item dropdown active">
+            <button class="nav-link btn btn-default dropdown-toggle" id="langNavbarDropdown" data-toggle="dropdown">Select Language</button>
 
-                    <!-- Select Language dropdown -->
-                    <li class="nav-item dropdown active">
-                        <button class="nav-link btn btn-default dropdown-toggle" id="langNavbarDropdown" data-toggle="dropdown">Select Language</button>
-
-                        <div class="dropdown-menu dropdown-menu-lang">
-                            <a class="dropdown-item" id="cDropdown" data-value="c">C</a>
-                            <a class="dropdown-item" id="cDropdown" data-value="cpp">C++</a>
-                            <a class="dropdown-item" id="pythonDropdown" data-value="py">Python</a>
-                            <a class="dropdown-item" id="javaDropdown" data-value="java">Java</a>
-                        </div>
-                    </li>
-                    <!-- /#Select Language dropdown wrapper -->
-
-                    <!-- Select Theme dropdown -->
-                    <li class="nav-item dropdown active">
-                        <button class="nav-link btn btn-default dropdown-toggle" id="themesNavbarDropdown" data-toggle="dropdown">Select Theme</button>
-                        <div class="dropdown-menu dropdown-menu-theme">
-                            <a class="dropdown-item" id="lightDropdown" data-value="light">Light</a>
-                            <a class="dropdown-item" id="darkDropdown" data-value="dark">Dark</a>
-                        </div>
-                    </li>
-
-                    <!-- /#Select Theme dropdown Wraper -->
-
-
-                </ul>
+            <div class="dropdown-menu dropdown-menu-lang">
+              <a class="dropdown-item" id="cDropdown" data-value="50">C (GCC 9.2.0)</a>
+              <a class="dropdown-item" id="cDropdown" data-value="54">C++ (GCC 9.2.0)</a>
+              <a class="dropdown-item" id="pythonDropdown" data-value="71">Python (3.8.1)</a>
+              <a class="dropdown-item" id="javaDropdown" data-value="62">Java (OpenJDK 13.0.1)</a>
             </div>
-        </nav>
-        <!-- /#Navbar wrapper  -->
+          </li>
+          <!-- /#Select Language dropdown wrapper -->
 
-        <!-- page Container -->
-        <div class="page-container">
-            <div class="panel-container">
-                <% if (title==='Codeaholic IDE') {  %>
-                <!-- Left pane -->
-                <div class="panel-left questionPane">
-                    <div class="panel-container-vertical">
-                        <h2><%= problem.name %></h2>
-                        <p><%= problem.statement%></p>
-                        <br>
-                        <b>Input format</b>
-                        <p><%= problem.input_format %></p>
+          <!-- Select Theme dropdown -->
+          <li class="nav-item dropdown active">
+            <button class="nav-link btn btn-default dropdown-toggle" id="themesNavbarDropdown" data-toggle="dropdown">Select Theme</button>
+            <div class="dropdown-menu dropdown-menu-theme">
+              <a class="dropdown-item" id="lightDropdown" data-value="light">Light</a>
+              <a class="dropdown-item" id="darkDropdown" data-value="dark">Dark</a>
+            </div>
+          </li>
 
-                        <b>Constraints</b>
-                        <p><%= problem.constraints %></p>
+          <!-- /#Select Theme dropdown Wraper -->
+        </ul>
+      </div>
+    </nav>
+    <!-- /#Navbar wrapper  -->
 
-                        <b>Output format</b>
-                        <p><%= problem.input_format %></p>
+    <!-- page Container -->
+    <div class="page-container">
+      <div class="panel-container">
+        <% if (title==='Codeaholic IDE') { %>
+        <!-- Left pane -->
+        <div class="panel-left questionPane">
+          <div class="panel-container-vertical">
+            <h2><%= problem.name %></h2>
+            <p><%= problem.statement%></p>
+            <br />
+            <b>Input format</b>
+            <p><%= problem.input_format %></p>
 
-                        <b>Sample Input</b>
-                        <pre class="ioContainer" style="white-space: pre-line">
+            <b>Constraints</b>
+            <p><%= problem.constraints %></p>
+
+            <b>Output format</b>
+            <p><%= problem.input_format %></p>
+
+            <b>Sample Input</b>
+            <pre class="ioContainer" style="white-space: pre-line;">
                         <%= problem.sample_testcases[0]['input'] %>
-                        </pre>
-                        <b>Sample Output</b>
-                        <pre class="ioContainer" style="white-space: pre-line">
+                        </pre
+            >
+            <b>Sample Output</b>
+            <pre class="ioContainer" style="white-space: pre-line;">
                         <%= problem.sample_testcases[0]['output'] %>
-                        </pre>
-                    </div>
-                </div>
-                <!-- /#Left pane  Wrapper -->
-
-                <div class="splitter"></div>
-
-                <% } %>
-
-
-                <!-- Right Pane -->
-                <div class="panel-right idePane">
-                    <div class="panel-container-vertical">
-
-                        <!-- Right Pane Top "Editor" -->
-                        <div class="panel-top editorPane">
-                            <div id="editor"></div>
-                        </div>
-                        <!-- /#Right Pane Top "Editor" Wrapper -->
-
-                        <div class="splitter-horizontal"></div>
-
-                        <!-- Right Pane Bottom "IO Pane" -->
-                        <div class="panel-bottom ioPane">
-                            <div class="panel-container">
-                                <!-- Right Pane Bottom Left "Input Pane" -->
-                                <div class="panel-left inputPane">
-                                    <div class="d-flex justify-content-center">INPUT</div>
-                                    <textarea class="form-control inputContainer" id="inputTextbox" rows="7"></textarea>
-                                </div>
-                                <!-- /#Right Pane Bottom Left "Input Pane" Wrapper -->
-                                <div class="splitter"></div>
-                                <!-- Right Pane Bottom Right "Output Pane" -->
-                                <div class="panel-right outputPane">
-                                    <div class="d-flex justify-content-center">OUTPUT</div>
-                                    <div class="spinner-border" id="outputSpinner" role="status" style="display:none;">
-                                    </div>
-                                    <pre class="outputContainer" id="outputTextbox" style="display:block;"></pre>
-
-                                </div>
-                                <!-- /#Right Pane Bottom Right "Output Pane" -->
-                            </div>
-                        </div>
-                        <!-- /#Right Pane Bottom IO Pane Wrapper -->
-                    </div>
-                </div>
-                <!-- /#Right Pane Wrapper -->
-
-            </div>
-
+                        </pre
+            >
+          </div>
         </div>
-        <!-- /#page Container wrapper -->
+        <!-- /#Left pane  Wrapper -->
 
+        <div class="splitter"></div>
+
+        <% } %>
+
+        <!-- Right Pane -->
+        <div class="panel-right idePane">
+          <div class="panel-container-vertical">
+            <!-- Right Pane Top "Editor" -->
+            <div class="panel-top editorPane">
+              <div id="editor"></div>
+            </div>
+            <!-- /#Right Pane Top "Editor" Wrapper -->
+
+            <div class="splitter-horizontal"></div>
+
+            <!-- Right Pane Bottom "IO Pane" -->
+            <div class="panel-bottom ioPane">
+              <div class="panel-container">
+                <!-- Right Pane Bottom Left "Input Pane" -->
+                <div class="panel-left inputPane">
+                  <div class="d-flex justify-content-center">INPUT</div>
+                  <textarea class="form-control inputContainer" id="inputTextbox" rows="7"></textarea>
+                </div>
+                <!-- /#Right Pane Bottom Left "Input Pane" Wrapper -->
+                <div class="splitter"></div>
+                <!-- Right Pane Bottom Right "Output Pane" -->
+                <div class="panel-right outputPane">
+                  <div class="d-flex justify-content-center">OUTPUT</div>
+                  <div class="spinner-border" id="outputSpinner" role="status" style="display: none;"></div>
+                  <pre class="outputContainer" id="outputTextbox" style="display: block;"></pre>
+                </div>
+                <!-- /#Right Pane Bottom Right "Output Pane" -->
+              </div>
+            </div>
+            <!-- /#Right Pane Bottom IO Pane Wrapper -->
+          </div>
+        </div>
+        <!-- /#Right Pane Wrapper -->
+      </div>
     </div>
-    <!-- /#Page Content Wrapper -->
-
+    <!-- /#page Container wrapper -->
+  </div>
+  <!-- /#Page Content Wrapper -->
 </div>
 <!-- /#Main wrapper -->
 
