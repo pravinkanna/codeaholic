@@ -1,10 +1,4 @@
-const path = require("path");
-const util = require("util");
 const rp = require("request-promise");
-const exec = util.promisify(require("child_process").exec);
-const writeFile = util.promisify(require("fs").writeFile);
-const mkdir = util.promisify(require("fs").mkdir);
-const rmdir = util.promisify(require("fs").rmdir);
 
 // Models
 const Problem = require("../models/Problem");

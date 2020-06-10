@@ -8,7 +8,6 @@ let selectedLanguage = "plain_text";
 
 //Ace Editor Configuration
 var editor = ace.edit("editor");
-var beautify = ace.require("ace/ext/beautify");
 editor.setTheme("ace/theme/textmate");
 editor.getSession().setMode("ace/mode/plain_text");
 editor.setFontSize(18);
