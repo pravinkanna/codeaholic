@@ -61,10 +61,20 @@ function runCode(e) {
       document.getElementById("outputSpinner").style.display = "none";
       document.getElementById("outputTextbox").style.display = "block";
       //Printing Output in Output textbox
-      if (data["stderr"] || data["error"] || data["compile_output"]) {
-        document.getElementById("outputTextbox").innerHTML = '<span style="color:red">Compiled in ' + data["stderr"] + "<br/>" + data["error"] + "</span>" + "<br/>" + data["compile_output"] + "</span>";
-      } else {
+      if (data["status"]["id"] == 3 || data["status"]["id"] == 4) {
+        //  3 ==> Accepted  4 ==> Wrong Answer
         document.getElementById("outputTextbox").innerHTML = data["stdout"] + "<br/>" + '<span style="color:green">Compiled in <b>' + data["time"] + "</b>&nbsp;ms</span>";
+      } else if (data["status"]["id"] == 5) {
+        //  5 ==> Time limit exceeds
+        document.getElementById("outputTextbox").innerHTML = '<span style="color:#ff8000">Time Limit Exceeded</span>';
+      } else if (data["status"]["id"] == 6) {
+        //6 ==> Compilation Error
+        document.getElementById("outputTextbox").innerHTML = '<span style="color:red">' + data["compile_output"] + "</span>";
+      } else if (data["status"]["id"] >= 7 && data["status"]["id"] <= 12) {
+        //7,8,9,10,11,12 ==> Runtime Error
+        document.getElementById("outputTextbox").innerHTML = `<span style="color:red">Error Code<b>${data["status"]["id"]}</b><br />${data["compile_output"]}</span>`;
+      } else {
+        document.getElementById("outputTextbox").innerHTML = '<span style="color:red">SERVER INTERNAL ERROR</span>';
       }
       //Enabling Run and submit button while code is running
       document.getElementById("runBtn").disabled = false;
@@ -89,51 +99,51 @@ function runCode(e) {
 }
 
 // Function to stop running code
-if (document.getElementById("stopBtn") !== null) {
-  document.getElementById("stopBtn").addEventListener("click", stopCode);
-}
+// if (document.getElementById("stopBtn") !== null) {
+//   document.getElementById("stopBtn").addEventListener("click", stopCode);
+// }
 
-function stopCode(e) {
-  e.preventDefault();
-  //Getting current URL
-  const URL = window.location.href;
+// function stopCode(e) {
+//   e.preventDefault();
+//   //Getting current URL
+//   const URL = window.location.href;
 
-  fetch(URL + "/stop", {
-    method: "GET",
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-type": "application/json",
-      "user-agent": "*",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      //Disabling Spinner
-      document.getElementById("outputSpinner").style.display = "none";
-      document.getElementById("outputTextbox").style.display = "block";
-      //Printing Output in Output textbox
-      document.getElementById("outputTextbox").innerHTML = data;
-      //Enabling Run and submit button while code is running
-      document.getElementById("runBtn").disabled = false;
-      if (document.getElementById("submitBtn") !== null) {
-        document.getElementById("submitBtn").disabled = false;
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      //Printing Error in Output textbox
-      document.getElementById("outputSpinner").style.display = "none";
-      document.getElementById("outputTextbox").style.display = "block";
+//   fetch(URL + "/stop", {
+//     method: "GET",
+//     headers: {
+//       Accept: "application/json, text/plain, */*",
+//       "Content-type": "application/json",
+//       "user-agent": "*",
+//     },
+//   })
+//     .then((res) => res.json())
+//     .then((data) => {
+//       //Disabling Spinner
+//       document.getElementById("outputSpinner").style.display = "none";
+//       document.getElementById("outputTextbox").style.display = "block";
+//       //Printing Output in Output textbox
+//       document.getElementById("outputTextbox").innerHTML = data;
+//       //Enabling Run and submit button while code is running
+//       document.getElementById("runBtn").disabled = false;
+//       if (document.getElementById("submitBtn") !== null) {
+//         document.getElementById("submitBtn").disabled = false;
+//       }
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       //Printing Error in Output textbox
+//       document.getElementById("outputSpinner").style.display = "none";
+//       document.getElementById("outputTextbox").style.display = "block";
 
-      //Enabling Run and submit button while code is running
-      document.getElementById("runBtn").disabled = false;
-      if (document.getElementById("submitBtn") !== null) {
-        document.getElementById("submitBtn").disabled = false;
-      }
+//       //Enabling Run and submit button while code is running
+//       document.getElementById("runBtn").disabled = false;
+//       if (document.getElementById("submitBtn") !== null) {
+//         document.getElementById("submitBtn").disabled = false;
+//       }
 
-      document.getElementById("outputTextbox").innerHTML = "<span style=color:red>SERVER ERROR: " + err + "</span>";
-    });
-}
+//       document.getElementById("outputTextbox").innerHTML = "<span style=color:red>SERVER ERROR: " + err + "</span>";
+//     });
+// }
 
 // Function to submit code
 if (document.getElementById("submitBtn") !== null) {

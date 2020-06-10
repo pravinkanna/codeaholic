@@ -21,7 +21,7 @@ exports.run = async (req, res) => {
     const token = await creteSingleSubmission(stdin, src, langId);
     //Getting submission with Token-ID
     var result = await getSingleSubmission(token);
-
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     while (result["status"]["id"] <= 2) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       result = await getSingleSubmission(token);
@@ -78,6 +78,18 @@ exports.submit = async (req, res) => {
   return res.send(JSON.stringify({ output: result, error: "" }));
 };
 
+//Encode BASE64
+const encodeB64 = (plainStr) => {
+  const encodedStr = Buffer.from(plainStr).toString("base64");
+  return encodedStr;
+};
+
+//Decode BASE64
+const decodeB64 = (encodedStr) => {
+  const decodedStr = Buffer.from(encodedStr, "base64").toString("utf8");
+  return decodedStr;
+};
+
 //Function to Create Single Submission
 const creteSingleSubmission = async (stdin, src, langId) => {
   return new Promise(async (resolve, reject) => {
@@ -95,7 +107,7 @@ const creteSingleSubmission = async (stdin, src, langId) => {
           language_id: langId,
           source_code: src,
           stdin: stdin,
-          expected_output: "Hello world",
+          expected_output: encodeB64("Hello world"),
         },
         json: true,
       };
@@ -132,8 +144,6 @@ const getSingleSubmission = async (token) => {
       await rp(options, function (error, response, body) {
         if (error) throw new Error(error);
         result = JSON.parse(body);
-        // console.log("ID: ", body);
-        // console.log("ID: ", result.status.id);
       });
 
       resolve(result);
@@ -144,37 +154,3 @@ const getSingleSubmission = async (token) => {
     }
   });
 };
-
-const encodeB64 = (plainStr) => {
-  const encodedStr = Buffer.from(plainStr).toString("base64");
-  return encodedStr;
-};
-
-const decodeB64 = (encodedStr) => {
-  const decodedStr = Buffer.from(encodedStr, "base64").toString("utf8");
-  return decodedStr;
-};
-
-// if (lang === 'c') {
-//     child = await exec(`gcc ${reg_no}_c.c -o ${reg_no}_c`, { cwd: pathToUserDir })
-//     const { stdout, stderr } = await exec(`./${reg_no}_c < ${reg_no}_input.txt`, { timeout: 100, maxBuffer: 1024 * 100, cwd: pathToUserDir })
-//     output = stdout;
-//     error = stderr;
-// } else if (lang === 'cpp') {
-//     await exec(`g++ ${reg_no}_cpp.cpp -o ${reg_no}_cpp`, { cwd: pathToUserDir })
-//     const { stdout, stderr } = await exec(`./${reg_no}_cpp < ${reg_no}_input.txt`, { timeout: 100, maxBuffer: 1024 * 100, cwd: pathToUserDir })
-//     output = stdout;
-//     error = stderr;
-// } else if (lang === 'py') {
-//     const { stdout, stderr } = await exec(`python3 ${reg_no}_py.py < ${reg_no}_input.txt`, { cwd: pathToUserDir });
-//     output = stdout;
-//     error = stderr;
-// } else if (lang === 'java') {
-//     await exec(`javac ${reg_no}_java.java`, { cwd: pathToUserDir });
-//     const { stdout, stderr } = await exec(`java Main`, { cwd: pathToUserDir });
-//     output = stdout;
-//     error = stderr;
-// } else {
-//     console.error("No Language Selected");
-//     error = "No Language Selected";
-// }

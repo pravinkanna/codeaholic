@@ -25,7 +25,6 @@ $(".dropdown-menu.dropdown-menu-lang a").click(function () {
   $(this).parents(".dropdown").find(".btn").html($(this).text());
   $(this).parents(".dropdown").find(".btn").val($(this).data("value"));
   selectedLanguage = $(this).data("value");
-  console.log(selectedLanguage);
 
   switch (selectedLanguage) {
     case 50:
