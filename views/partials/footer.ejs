@@ -1,13 +1,13 @@
 <!-- JQUERY -->
 <script src="/js/jquery-3.5.0.min.js"></script>
+<% if(title == 'Create Problem' || title == 'Edit Problem') { %>
 <!-- search functionality on input box -->
 <script src="/js/chosen.jquery.min.js" type="text/javascript"></script>
 <script src="/js/chosenInit.js" type="text/javascript" charset="utf-8"></script>
+<% } %>
 <% if(title == 'Codeaholic IDE' || title == 'Codeaholic Playground') { %>
 <!-- JQUERY UI -->
-<script src="/js/jquery-ui.min.js"></script>
-<!-- BOOTSTRAP BUNDLE JS -->
-<!-- <script src="/js/bootstrap.bundle.min.js"></script> -->
+<script src="/js/jquery-ui.min.js"> </script>
 <!-- ACE EDITOR Core-->
 <script src="/js/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <!-- ACE EDITOR auto complete functionality -->
@@ -19,7 +19,6 @@
 <% } %>
 <!-- BOOTSTRAP JS -->
 <script src="/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

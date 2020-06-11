@@ -37,18 +37,22 @@ body {
   overflow: hidden;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-left: 0;
   }
+
+  #sidebar-wrapper .list-group {
+    width: 35rem;
+  }
   
   #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
+    min-width: 100vw;
   }
   
   #wrapper.toggled #sidebar-wrapper {
-    margin-left: -35.2rem;
+    margin-left: 0;
+    overflow: hidden;
   }
-}
+} */
 
