@@ -6,3 +6,6 @@ temp
 
 //node module
 node_module
+
+//vscode config
+.vscode
