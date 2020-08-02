@@ -1,31 +1,32 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,body {
+html,
+body {
   font-family: Helvetica, sans-serif;
   background: whitesmoke;
 }
 
 /*Home Page*/
-#home-heading{
+#home-heading {
   margin-top: 5rem;
 }
 
-.card-container{
+.card-container {
   margin-top: 10rem;
 }
 
 /* Navbar button spacing */
-.btn{
-  margin-left:10px;
+.btn {
+  margin-left: 10px;
   margin-right: 10px;
 }
 
 /* For Ace Editor */
-#editor { 
+#editor {
   position: relative;
   height: 100%;
   width: 100%;
@@ -62,22 +63,22 @@ html,body {
   max-width: 90vw;
 }
 
-.panel-left.questionPane .panel-container-vertical{
+.panel-left.questionPane .panel-container-vertical {
   overflow: auto;
   padding: 15px;
 }
 
-.ioContainer{
-    background-color: lightgray;
-    padding: 10px;
+.ioContainer {
+  background-color: lightgray;
+  padding: 10px;
 }
 
 .splitter {
   flex: 0 0 auto;
-  width: 2px;  
+  width: 2px;
   background: #535353;
   min-height: 200px;
-  cursor: col-resize;  
+  cursor: col-resize;
 }
 
 .panel-right {
@@ -113,12 +114,12 @@ html,body {
   height: 100px;
 }
 
-.panel-left.inputPane{
+.panel-left.inputPane {
   width: 50%;
   padding: 10px;
 }
 
-.panel-right.outputPane{
+.panel-right.outputPane {
   width: 50%;
   padding: 10px;
 }
@@ -136,5 +137,3 @@ html,body {
   top: 50px;
   left: 50%;
 }
-
-
